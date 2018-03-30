@@ -29,7 +29,7 @@ class MainWindowSlots(Ui_Form):   # Определяем функции, кот�
         self.tableWidget.setRowCount(0)        # Кол-во строк из таблицы
         sql = 'SELECT phone, tip, about, DATE_FORMAT(edit_date,"%d.%m %H:%i") FROM contacts'
         if lenl(self.leFilter.text()) > 0:
-            sql += ' WHERE phone LIKE "' + str(lenl(self.leFilter.text())) + '%"'
+            sql += ' WHERE phone LIKE "%' + str(l(self.leFilter.text())) + '%"'
         self.dbconn.connect()
         read_cursor = self.dbconn.cursor()
         read_cursor.execute(sql)
@@ -107,6 +107,7 @@ class MainWindowSlots(Ui_Form):   # Определяем функции, кот�
                                                                                         datetime.now(), a))
         self.dbconn.commit()
 
+        self.leFilter.setText('')
         self.setup_tableWidget()
         return
 
