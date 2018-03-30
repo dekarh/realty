@@ -7,7 +7,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QWidget, QTableWidget, QTableWidgetItem, QLabel
 
 
-from lib import l, lenl, read_config
+from lib import l, lenl, read_config, fine_phone
 from realty_win import Ui_Form
 
 class MainWindowSlots(Ui_Form):   # Определяем функции, которые будем вызывать в слотах
@@ -39,7 +39,10 @@ class MainWindowSlots(Ui_Form):   # Определяем функции, кот�
         for i, row in enumerate(rows):
             for j, cell in enumerate(row):
                 label = QLabel()
-                label.setText(str(cell))
+                if j == 0:
+                    label.setText(fine_phone(str(cell)))
+                else:
+                    label.setText(str(cell))
                 label.setAlignment(Qt.AlignCenter)
                 self.tableWidget.setCellWidget(i, j, label)
  #               self.tableWidget.setItem(i, j, QTableWidgetItem(str(cell)))
